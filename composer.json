@@ -1,0 +1,42 @@
+{
+  "name": "krixon/domain-event",
+  "type": "library",
+  "description": "Domain event library.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Karl Rixon",
+      "email": "karl@karlrixon.co.uk",
+      "homepage": "http://www.karlrixon.co.uk"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://bitbucket.org/krixon/datetime.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://bitbucket.org/krixon/identity.git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Krixon\\DomainEvent\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Krixon\\DomainEvent\\Test\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=7",
+    "ext-intl": "*",
+    "krixon/datetime": "dev-master",
+    "krixon/identity": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.4.*"
+  }
+}
