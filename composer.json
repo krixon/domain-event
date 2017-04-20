@@ -10,16 +10,6 @@
       "homepage": "http://www.karlrixon.co.uk"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://bitbucket.org/krixon/datetime.git"
-    },
-    {
-      "type": "vcs",
-      "url": "https://bitbucket.org/krixon/identity.git"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "Krixon\\DomainEvent\\": "src"
@@ -33,10 +23,10 @@
   "require": {
     "php": ">=7",
     "ext-intl": "*",
-    "krixon/datetime": "dev-master",
-    "krixon/identity": "dev-master"
+    "krixon/datetime": "^0.1",
+    "krixon/identity": "^0.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "5.4.*"
+    "phpunit/phpunit": "^5.4"
   }
 }
