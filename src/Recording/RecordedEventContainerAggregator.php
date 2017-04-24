@@ -18,7 +18,7 @@ class RecordedEventContainerAggregator implements RecordedEventContainer
      */
     public function __construct(array $recorders)
     {
-        foreach ($this->recorders as $recorder) {
+        foreach ($recorders as $recorder) {
             $this->addEventRecorder($recorder);
         }
     }
