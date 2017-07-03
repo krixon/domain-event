@@ -23,4 +23,15 @@ interface Event
      * @return int
      */
     public function eventVersion() : int;
+
+
+    /**
+     * The type of event.
+     *
+     * This is a string which uniquely identifies the type of event. The fully-qualified class name would be a good
+     * value for this, but it can be anything.
+     *
+     * @return string
+     */
+    public function eventType() : string;
 }

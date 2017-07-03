@@ -24,7 +24,7 @@ abstract class BaseEvent implements Event
     
     
     /**
-     * @return DateTime
+     * @inheritdoc
      */
     final public function occurredOn() : DateTime
     {
@@ -33,10 +33,19 @@ abstract class BaseEvent implements Event
     
     
     /**
-     * @return int
+     * @inheritdoc
      */
     final public function eventVersion() : int
     {
         return $this->eventVersion;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function eventType() : string
+    {
+        return get_class($this);
     }
 }

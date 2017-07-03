@@ -37,4 +37,13 @@ abstract class EventDecorator implements Event
     {
         return $this->wrapped->eventVersion();
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function eventType() : string
+    {
+        return $this->wrapped->eventType();
+    }
 }
