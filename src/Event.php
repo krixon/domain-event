@@ -4,39 +4,23 @@ namespace Krixon\DomainEvent;
 
 use Krixon\DateTime\DateTime;
 
-abstract class Event
+interface Event
 {
     /**
-     * @var int
-     */
-    protected $eventVersion = 0;
-    
-    /**
-     * @var DateTime
-     */
-    private $occurredOn;
-    
-    
-    public function __construct()
-    {
-        $this->occurredOn = DateTime::now();
-    }
-    
-    
-    /**
+     * The time at which the event occurred.
+     *
      * @return DateTime
      */
-    final public function occurredOn() : DateTime
-    {
-        return $this->occurredOn;
-    }
-    
-    
+    public function occurredOn() : DateTime;
+
+
     /**
+     * The version of the event.
+     *
+     * This should generally start at 0 and be bumped each time the structure of an event's payload changes. This
+     * allows code processing the event to adapt accordingly.
+     *
      * @return int
      */
-    final public function eventVersion() : int
-    {
-        return $this->eventVersion;
-    }
+    public function eventVersion() : int;
 }

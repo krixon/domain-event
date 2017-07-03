@@ -1,6 +1,7 @@
 <?php
 namespace Krixon\DomainEvent\Test\Recording;
 
+use Krixon\DomainEvent\BaseEvent;
 use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Recording\RecordedEventContainer;
 use Krixon\DomainEvent\Recording\RecordedEventContainerAggregator;
@@ -66,12 +67,12 @@ class RecordedEventContainerAggregatorTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Event
+     * @return \PHPUnit_Framework_MockObject_MockObject|BaseEvent
      */
     private function getMockEvent()
     {
         return $this
-            ->getMockBuilder(Event::class)
+            ->getMockBuilder(BaseEvent::class)
             ->enableOriginalConstructor()
             ->enableProxyingToOriginalMethods()
             ->getMockForAbstractClass();

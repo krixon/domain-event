@@ -53,7 +53,7 @@ class MemoryEventStreamStoreTest extends \PHPUnit_Framework_TestCase
         $events = [];
         
         for ($i = 0; $i < $amount; $i++) {
-            $events[] = $this->getMockForAbstractClass(Event::class);
+            $events[] = $this->createMock(Event::class);
         }
         
         return $events;
