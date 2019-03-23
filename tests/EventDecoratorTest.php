@@ -7,17 +7,9 @@ use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\EventDecorator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Krixon\DomainEvent\EventDecorator
- * @covers <protected>
- * @covers <private>
- */
 class EventDecoratorTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     */
-    public function testInstanceCanBeCreated()
+    public function testInstanceCanBeCreated() : void
     {
         $original  = $this->createMock(Event::class);
         $decorated = $this->concreteDecorator($original);
@@ -26,12 +18,7 @@ class EventDecoratorTest extends TestCase
     }
 
 
-    /**
-     * @covers ::occurredOn
-     * @covers ::eventVersion
-     * @covers ::eventType
-     */
-    public function testDelegatesToDecoratedEventByDefault()
+    public function testDelegatesToDecoratedEventByDefault() : void
     {
         $original  = $this->concreteEvent();
         $decorated = $this->concreteDecorator($original);
@@ -42,13 +29,13 @@ class EventDecoratorTest extends TestCase
     }
 
 
-    private function concreteDecorator($event) : EventDecorator
+    private static function concreteDecorator(Event $event) : EventDecorator
     {
         return new class($event) extends EventDecorator {};
     }
 
 
-    private function concreteEvent() : Event
+    private static function concreteEvent() : Event
     {
         return new class extends BaseEvent {};
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Krixon\DomainEvent\Test\Recording;
 
 use Krixon\DomainEvent\BaseEvent;
@@ -6,13 +7,10 @@ use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Recording\RecordedEventContainer;
 use Krixon\DomainEvent\Recording\RecordedEventContainerAggregator;
 use Krixon\DomainEvent\Recording\RecordsEventsInternally;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Krixon\DomainEvent\Recording\RecordedEventContainerAggregator
- * @covers             <protected>
- * @covers             <private>
- */
-class RecordedEventContainerAggregatorTest extends \PHPUnit_Framework_TestCase
+class RecordedEventContainerAggregatorTest extends TestCase
 {
     /**
      * @var RecordedEventContainerAggregator
@@ -30,10 +28,7 @@ class RecordedEventContainerAggregatorTest extends \PHPUnit_Framework_TestCase
     private $container2;
 
 
-    /**
-     * @inheritdoc
-     */
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 
@@ -44,7 +39,7 @@ class RecordedEventContainerAggregatorTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testAggregatesEvents()
+    public function testAggregatesEvents() : void
     {
         $events   = [];
         $events[] = $this->getMockEvent();
@@ -67,7 +62,7 @@ class RecordedEventContainerAggregatorTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|BaseEvent
+     * @return MockObject|BaseEvent
      */
     private function getMockEvent()
     {
@@ -84,7 +79,7 @@ class TestRecordedEventContainer implements RecordedEventContainer
 {
     use RecordsEventsInternally;
 
-    public function record(Event $event)
+    public function record(Event $event) : void
     {
         $this->recordEvent($event);
     }
