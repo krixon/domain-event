@@ -1,48 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Recording;
 
 use Krixon\DomainEvent\Event;
 
 /**
  * Provides an implementation for classes which record domain events in an internal property.
- * 
+ *
  * The provides an implementation of @see EventRecorder.
  */
 trait RecordsEventsInternally
 {
     private $recordedEvents = [];
-    
-    
+
+
     /**
      * @see EventRecorder
+     *
+     * @return Event[]
      */
-    public function recordedEvents()
+    public function recordedEvents() : array
     {
         return $this->recordedEvents;
     }
-    
-    
+
+
     /**
      * @see EventRecorder
      */
-    public function eraseRecordedEvents()
+    public function eraseRecordedEvents() : void
     {
         $this->recordedEvents = [];
     }
-    
-    
-    /**
-     * Records a new domain event.
-     * 
-     * @param Event $event
-     *
-     * @return $this
-     */
-    protected function recordEvent(Event $event)
+
+
+    protected function recordEvent(Event $event) : void
     {
         $this->recordedEvents[] = $event;
-        
-        return $this;
     }
 }

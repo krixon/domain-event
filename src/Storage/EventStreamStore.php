@@ -1,40 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Storage;
 
 use Krixon\DomainEvent\Sourcing\EventStream;
 use Krixon\DomainEvent\Sourcing\EventStreamId;
-use Krixon\DomainEvent\Storage\Exception\EventStreamNotFoundException;
+use Krixon\DomainEvent\Storage\Exception\EventStreamNotFound;
 
 interface EventStreamStore
 {
     /**
-     * @param EventStreamId $eventStreamId
-     *
-     * @return EventStream
-     * @throws EventStreamNotFoundException If the stream does not exist.
+     * @throws EventStreamNotFound If the stream does not exist.
      */
     public function eventStream(EventStreamId $eventStreamId) : EventStream;
-    
-    
+
+
     /**
-     * @param EventStreamId $eventStreamId
-     * @param int           $eventNumber
-     *
-     * @return EventStream
-     * @throws EventStreamNotFoundException If the stream or event number does not exist.
+     * @throws EventStreamNotFound If the stream or event number does not exist.
      */
-    public function eventStreamSinceEventNumber(EventStreamId $eventStreamId, $eventNumber) : EventStream;
-    
-    
-    /**
-     * @param EventStream $eventStream
-     */
-    public function appendEvents(EventStream $eventStream);
-    
-    
-    /**
-     * @return void
-     */
-    public function purge();
+    public function eventStreamSinceEventNumber(EventStreamId $eventStreamId, int $eventNumber) : EventStream;
+
+
+    public function appendEvents(EventStream $eventStream) : void;
+
+
+    public function purge() : void;
 }

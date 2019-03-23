@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Recording;
 
 use Krixon\DomainEvent\Event;
@@ -10,17 +12,10 @@ use Krixon\DomainEvent\Event;
 interface RecordedEventContainer
 {
     /**
-     * Returns all recorded domain events.
-     * 
      * @return Event[]
      */
-    public function recordedEvents();
-    
-    
-    /**
-     * Erases the internal domain event record.
-     * 
-     * @return void
-     */
-    public function eraseRecordedEvents();
+    public function recordedEvents() : array;
+
+
+    public function eraseRecordedEvents() : void;
 }

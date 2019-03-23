@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Storage\Exception;
 
-class EventStoreException extends \Exception
+interface EventStoreException
 {
-    
 }
