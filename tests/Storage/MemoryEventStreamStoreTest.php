@@ -6,18 +6,11 @@ use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Sourcing\EventStream;
 use Krixon\DomainEvent\Sourcing\EventStreamId;
 use Krixon\DomainEvent\Storage\MemoryEventStreamStore;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Krixon\DomainEvent\Storage\MemoryEventStreamStore
- * @covers <protected>
- * @covers <private>
- */
-class MemoryEventStreamStoreTest extends \PHPUnit_Framework_TestCase
+class MemoryEventStreamStoreTest extends TestCase
 {
-    /**
-     * @covers ::appendEvents
-     */
-    public function testAppendWith()
+    public function testAppendWith() : void
     {
         $eventStore  = new MemoryEventStreamStore;
         $eventStream = $this->createEventStream(5);
@@ -40,7 +33,7 @@ class MemoryEventStreamStoreTest extends \PHPUnit_Framework_TestCase
     }
     
     
-    private function createEventStream($numEvents, $firstEventNumber = -1, $streamName = 'test')
+    private function createEventStream(int $numEvents, int $firstEventNumber = -1, string $streamName = 'test') : EventStream
     {
         $eventStreamId = new EventStreamId($streamName);
         
@@ -48,7 +41,7 @@ class MemoryEventStreamStoreTest extends \PHPUnit_Framework_TestCase
     }
     
     
-    private function createEvents($amount)
+    private function createEvents(int $amount) : array
     {
         $events = [];
         

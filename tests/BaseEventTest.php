@@ -7,31 +7,19 @@ use Krixon\DomainEvent\BaseEvent;
 use Krixon\DomainEvent\Event;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass Krixon\DomainEvent\BaseEvent
- * @covers <protected>
- * @covers <private>
- */
 class BaseEventTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     * @covers ::occurredOn
-     */
-    public function testRecordsOccurredOnDuringConstruction()
+    public function testRecordsOccurredOnDuringConstruction() : void
     {
         $now   = DateTime::now();
         $event = $this->concreteEvent();
 
         // Timestamps should be equal within a couple of seconds.
-        static::assertEquals($now->timestamp(), $event->occurredOn()->timestamp(), '', 2);
+        static::assertEqualsWithDelta($now->timestamp(), $event->occurredOn()->timestamp(), 2);
     }
 
 
-    /**
-     * @covers ::eventVersion
-     */
-    public function testEventVersioningStartsFromZero()
+    public function testEventVersioningStartsFromZero() : void
     {
         $event = $this->concreteEvent();
 
@@ -39,10 +27,7 @@ class BaseEventTest extends TestCase
     }
 
 
-    /**
-     * @covers ::eventType
-     */
-    public function testEventTypeIsFullyQualifiedClassName()
+    public function testEventTypeIsFullyQualifiedClassName() : void
     {
         $event = $this->concreteEvent();
 
@@ -50,7 +35,7 @@ class BaseEventTest extends TestCase
     }
 
 
-    private function concreteEvent() : Event
+    private static function concreteEvent() : Event
     {
         return new class extends BaseEvent {};
     }
