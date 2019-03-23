@@ -1,61 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Recording;
+
+use function array_merge;
 
 /**
  * Aggregates multiple RecordedEventContainers together.
  */
 class RecordedEventContainerAggregator implements RecordedEventContainer
 {
-    /**
-     * @var RecordedEventContainer[]
-     */
+    /** @var RecordedEventContainer[] */
     private $recorders = [];
-    
-    
-    /**
-     * @param RecordedEventContainer[] $recorders
-     */
-    public function __construct(array $recorders)
+
+
+    public function __construct(RecordedEventContainer ...$recorders)
     {
         foreach ($recorders as $recorder) {
             $this->addEventRecorder($recorder);
         }
     }
-    
-    
+
+
     /**
      * @inheritdoc
      */
-    public function recordedEvents()
+    public function recordedEvents() : array
     {
         $events = [];
-    
+
         foreach ($this->recorders as $recorder) {
             $events = array_merge($events, $recorder->recordedEvents());
         }
-        
+
         return $events;
     }
-    
-    
-    /**
-     * @inheritdoc
-     */
-    public function eraseRecordedEvents()
+
+
+    public function eraseRecordedEvents() : void
     {
         foreach ($this->recorders as $recorder) {
             $recorder->eraseRecordedEvents();
         }
     }
-    
-    
-    /**
-     * Adds a new recorder to the set.
-     * 
-     * @param RecordedEventContainer $recorder
-     */
-    private function addEventRecorder(RecordedEventContainer $recorder)
+
+
+    private function addEventRecorder(RecordedEventContainer $recorder) : void
     {
         $this->recorders[] = $recorder;
     }
