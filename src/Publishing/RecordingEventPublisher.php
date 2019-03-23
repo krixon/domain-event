@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Publishing;
 
 use Krixon\DomainEvent\Event;
@@ -9,77 +11,58 @@ use Krixon\DomainEvent\Sourcing\EventStream;
 
 /**
  * Event publisher which can record any events it publishes.
- * 
+ *
  * This is especially useful when testing.
  */
 class RecordingEventPublisher implements EventPublisher, RecordedEventContainer
 {
     use RecordsEventsInternally;
-    
-    /**
-     * @var EventPublisher
-     */
+
     private $domainEventPublisher;
-    
-    /**
-     * @var bool
-     */
+
     private $recording = false;
-    
-    
-    /**
-     * @param EventPublisher $eventPublisher
-     */
+
+
     public function __construct(EventPublisher $eventPublisher)
     {
         $this->domainEventPublisher = $eventPublisher;
     }
-    
-    
-    /**
-     * @return void
-     */
-    public function startRecording()
+
+
+    public function startRecording() : void
     {
         $this->recording = true;
     }
-    
-    
-    /**
-     * @return void
-     */
-    public function stopRecording()
+
+
+    public function stopRecording() : void
     {
         $this->recording = false;
     }
-    
-    
+
+
     /**
      * @inheritdoc
      */
-    public function registerListener(callable $callable, $eventClass = null)
+    public function registerListener(callable $callable, $eventClass = null) : void
     {
         $this->domainEventPublisher->registerListener($callable, $eventClass);
     }
-    
-    
-    /**
-     * @inheritdoc
-     */
-    public function publish(Event $domainEvent)
+
+
+    public function publish(Event $domainEvent) : void
     {
         $this->domainEventPublisher->publish($domainEvent);
-        
-        if ($this->recording) {
-            $this->recordEvent($domainEvent);
+
+        if (!$this->recording) {
+            return;
         }
+
+        $this->recordEvent($domainEvent);
     }
-    
-    
-    /**
-     * @inheritdoc
-     */
-    public function publishStream(EventStream $eventStream)
+
+
+    public function publishStream(EventStream $eventStream) : void
     {
         foreach ($eventStream as $event) {
             $this->publish($event);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Test\Recording;
 
 use Krixon\DomainEvent\BaseEvent;
@@ -12,19 +14,13 @@ use PHPUnit\Framework\TestCase;
 
 class RecordedEventContainerAggregatorTest extends TestCase
 {
-    /**
-     * @var RecordedEventContainerAggregator
-     */
+    /** @var RecordedEventContainerAggregator */
     private $aggregator;
 
-    /**
-     * @var TestRecordedEventContainer
-     */
+    /** @var TestRecordedEventContainer */
     private $container1;
 
-    /**
-     * @var TestRecordedEventContainer
-     */
+    /** @var TestRecordedEventContainer */
     private $container2;
 
 
@@ -32,10 +28,10 @@ class RecordedEventContainerAggregatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->container1 = new TestRecordedEventContainer;
-        $this->container2 = new TestRecordedEventContainer;
+        $this->container1 = new TestRecordedEventContainer();
+        $this->container2 = new TestRecordedEventContainer();
 
-        $this->aggregator = new RecordedEventContainerAggregator([$this->container1, $this->container2]);
+        $this->aggregator = new RecordedEventContainerAggregator($this->container1, $this->container2);
     }
 
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Publishing;
 
 use Krixon\DomainEvent\Event;
@@ -14,23 +16,19 @@ interface EventPublisher
      * @param string|string[]|null $eventClass The event type to listen to, an array of event types, or null for
      *                                         all events.
      */
-    public function registerListener(callable $callable, $eventClass = null);
-    
-    
+    public function registerListener(callable $callable, $eventClass = null) : void;
+
+
     /**
      * Publishes a domain event.
      *
      * If an event is currently being published, the new event will be queued until it has finished.
-     *
-     * @param Event $domainEvent
      */
-    public function publish(Event $domainEvent);
-    
-    
+    public function publish(Event $domainEvent) : void;
+
+
     /**
      * Publishes a stream of domain events.
-     *
-     * @param EventStream $eventStream
      */
-    public function publishStream(EventStream $eventStream);
+    public function publishStream(EventStream $eventStream) : void;
 }

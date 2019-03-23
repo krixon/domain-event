@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Test;
 
 use Krixon\DomainEvent\BaseEvent;
@@ -31,12 +33,14 @@ class EventDecoratorTest extends TestCase
 
     private static function concreteDecorator(Event $event) : EventDecorator
     {
-        return new class($event) extends EventDecorator {};
+        return new class($event) extends EventDecorator {
+        };
     }
 
 
     private static function concreteEvent() : Event
     {
-        return new class extends BaseEvent {};
+        return new class extends BaseEvent {
+        };
     }
 }

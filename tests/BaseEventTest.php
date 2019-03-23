@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Krixon\DomainEvent\Test;
 
 use Krixon\DateTime\DateTime;
 use Krixon\DomainEvent\BaseEvent;
 use Krixon\DomainEvent\Event;
 use PHPUnit\Framework\TestCase;
+use function get_class;
 
 class BaseEventTest extends TestCase
 {
@@ -37,6 +40,7 @@ class BaseEventTest extends TestCase
 
     private static function concreteEvent() : Event
     {
-        return new class extends BaseEvent {};
+        return new class extends BaseEvent {
+        };
     }
 }
