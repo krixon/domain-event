@@ -38,6 +38,10 @@ final class EventStream implements IdentityProvider, Countable, IteratorAggregat
             throw new InvalidArgumentException('Event stream must contain at least one event.');
         }
 
+        if ($firstEventNumber < 0) {
+            throw new InvalidArgumentException('First event number cannot be less than 0.');
+        }
+
         $this->id               = $eventStreamId;
         $this->firstEventNumber = $firstEventNumber;
         $this->lastEventNumber  = $firstEventNumber - 1;
@@ -87,7 +91,7 @@ final class EventStream implements IdentityProvider, Countable, IteratorAggregat
      */
     public function isPartial() : bool
     {
-        return $this->firstEventNumber() > -1;
+        return $this->firstEventNumber() > 0;
     }
 
 

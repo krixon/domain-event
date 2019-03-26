@@ -37,7 +37,7 @@ class MemoryEventStreamStoreTest extends TestCase
 
     private function createEventStream(
         int $numEvents,
-        int $firstEventNumber = -1,
+        int $firstEventNumber = 0,
         string $streamName = 'test'
     ) : EventStream {
         $eventStreamId = new EventStreamId($streamName);
