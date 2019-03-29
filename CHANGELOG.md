@@ -18,6 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Event storage exceptions.
-- Bumped PHP version requirement to `7.1`.
+- Bumped PHP version requirement to `7.2`.
 - Updated dependencies.
 
