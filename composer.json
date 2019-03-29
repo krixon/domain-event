@@ -25,7 +25,7 @@
     }
   },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "ext-intl": "*",
     "krixon/datetime": "^0.1",
     "krixon/identity": "^0.1"
