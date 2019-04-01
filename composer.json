@@ -21,7 +21,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Krixon\\DomainEvent\\Test\\": "tests"
+      "Krixon\\DomainEvent\\TestUnit\\": "tests/unit",
+      "Krixon\\DomainEvent\\TestResource\\": "tests/resources"
     }
   },
   "require": {

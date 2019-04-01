@@ -12,17 +12,30 @@ A library for using domain events.
 
 `$ composer require krixon/domain-event`
 
-# Development
+## Development
 
-## Build Images and Run Containers
+### Build Image and Run Container
 
-Build images:
+Note: If your host machine's user does not have an ID of 1000, run the following command from the project root
+directory:
 
-`$ docker-compose build --build-arg builduser=$(id -u) library`
+```bash
+echo "DEV_UID=$(id -u)" > .env
+```
+This ensures that any files created in mounted directories have the correct permissions. It will also cause the host
+user's SSH keys and Composer cache to be used inside the container.
+
+Build image:
+
+`$ docker-compose build`
 
 Install dependencies:
 
 `$ docker-compose run --rm library composer install`
+
+### Run the tests
+
+`$ docker-compose run --rm library composer test`
 
 ## Coding Standard
 

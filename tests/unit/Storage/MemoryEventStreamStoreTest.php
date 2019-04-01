@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Krixon\DomainEvent\Test\Storage;
+namespace Krixon\DomainEvent\TestUnit\Storage;
 
 use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Sourcing\EventStream;

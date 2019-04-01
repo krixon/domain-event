@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Krixon\DomainEvent\Test\Recording;
+namespace Krixon\DomainEvent\TestUnit\Recording;
 
 use Krixon\DomainEvent\BaseEvent;
 use Krixon\DomainEvent\Event;

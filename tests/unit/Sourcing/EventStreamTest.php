@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Krixon\DomainEvent\Test\Sourcing;
+namespace Krixon\DomainEvent\TestUnit\Sourcing;
 
 use InvalidArgumentException;
 use Krixon\DomainEvent\Event;

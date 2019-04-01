@@ -31,7 +31,7 @@ abstract class BaseEvent implements Event
     }
 
 
-    public function eventType() : string
+    public static function eventType() : string
     {
         return static::class;
     }
