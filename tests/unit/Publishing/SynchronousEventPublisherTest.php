@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Krixon\DomainEvent\Test\Publishing;
+namespace Krixon\DomainEvent\TestUnit\Publishing;
 
 use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Publishing\SynchronousEventPublisher;
