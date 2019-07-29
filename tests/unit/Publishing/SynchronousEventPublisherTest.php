@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Krixon\DomainEvent\TestUnit\Publishing;
 
+use Krixon\DomainEvent\BaseEvent;
 use Krixon\DomainEvent\Event;
 use Krixon\DomainEvent\Publishing\SynchronousEventPublisher;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -20,6 +21,12 @@ class SynchronousEventPublisherTest extends TestCase
     /** @var TraceableEventListener */
     private $listener2;
 
+    /** @var TraceableEventListener */
+    private $listener3;
+
+    /** @var TraceableEventListener */
+    private $listener4;
+
 
     protected function setUp() : void
     {
@@ -28,36 +35,49 @@ class SynchronousEventPublisherTest extends TestCase
         $this->publisher = new SynchronousEventPublisher();
         $this->listener1 = new TraceableEventListener();
         $this->listener2 = new TraceableEventListener();
+        $this->listener3 = new TraceableEventListener();
+        $this->listener4 = new TraceableEventListener();
 
         $this->assertFalse($this->listener1->wasInvoked());
         $this->assertFalse($this->listener2->wasInvoked());
+        $this->assertFalse($this->listener3->wasInvoked());
+        $this->assertFalse($this->listener4->wasInvoked());
     }
 
 
-    public function testPublishesEventsToListeners() : void
+    public function testPublishesEventsListeners() : void
     {
-        $event = $this->getMockEvent();
-
         $this->publisher->registerListener($this->listener1);
         $this->publisher->registerListener($this->listener2);
+        $this->publisher->registerListener($this->listener3, BaseEvent::class);
+        $this->publisher->registerListener($this->listener4, SuperEvent::class);
 
-        $this->publisher->publish($event);
+        $baseEvent  = new class extends BaseEvent {};
+        $superEvent = new SuperEvent();
 
-        $this->assertTrue($this->listener1->wasInvokedWith($event));
-        $this->assertTrue($this->listener2->wasInvokedWith($event));
-    }
+        $this->publisher->publish($baseEvent);
 
+        // Global listeners should always be invoked by a published event.
+        $this->assertTrue($this->listener1->wasInvokedWith($baseEvent));
+        $this->assertTrue($this->listener2->wasInvokedWith($baseEvent));
 
-    /**
-     * @return MockObject|Event
-     */
-    private function getMockEvent()
-    {
-        return $this
-            ->getMockBuilder(Event::class)
-            ->enableOriginalConstructor()
-            ->enableProxyingToOriginalMethods()
-            ->getMockForAbstractClass();
+        // Listener 3 should have been invoked as it's scoped to the base event.
+        $this->assertTrue($this->listener3->wasInvokedWith($baseEvent));
+
+        // Listener 4 should not have been invoked as it's scoped to the super event.
+        $this->assertFalse($this->listener4->wasInvoked());
+
+        $this->publisher->publish($superEvent);
+
+        // Global listeners should always be invoked by a published event.
+        $this->assertTrue($this->listener1->wasInvokedWith($superEvent));
+        $this->assertTrue($this->listener2->wasInvokedWith($superEvent));
+
+        // Listener 3 should have been invoked as the super event is a child of the base event.
+        $this->assertTrue($this->listener3->wasInvokedWith($superEvent));
+
+        // Listener 4 should have been invoked as it's scoped to the super event.
+        $this->assertTrue($this->listener4->wasInvokedWith($superEvent));
     }
 }
 
@@ -83,4 +103,9 @@ class TraceableEventListener
     {
         $this->invokedWith = $event;
     }
+}
+
+
+class SuperEvent extends BaseEvent {
+
 }

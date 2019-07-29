@@ -88,11 +88,11 @@ class SynchronousEventPublisher implements EventPublisher
 
     private function doPublish(Event $domainEvent) : void
     {
-        $class = get_class($domainEvent);
-
-        if (isset($this->listeners[$class])) {
-            foreach ($this->listeners[$class] as $listener) {
-                call_user_func($listener, $domainEvent);
+        foreach ($this->listeners as $class => $listeners) {
+            if (is_a($domainEvent, $class)) {
+                foreach ($listeners as $listener) {
+                    call_user_func($listener, $domainEvent);
+                }
             }
         }
 
