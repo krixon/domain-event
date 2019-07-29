@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `SynchronousEventPublisher` will now invoke listeners when the published event is a subtype of the event they're
 interested in.
 
+### Added
+
+- Exception for event store implementations to throw when failing to append an event.
+
 ## [0.2.0]
 
 ### Added
